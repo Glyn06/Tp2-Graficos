@@ -1,66 +1,42 @@
-//Using SDL and standard IO
 #include <SDL.h>
-#include <stdio.h>
+#include <iostream>
 
-//Screen dimension constants
+const int SCREEN_HEIGTH = 800;
 const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+
+SDL_Window* window;
+SDL_Renderer* renderer;
+
+
 
 int main(int argc, char* args[])
 {
-	SDL_Renderer* renderer;
-	SDL_Rect rectangle;
-	rectangle.x = 50;
-	rectangle.y = 50;
-	rectangle.h = 100;
-	rectangle.w = 50;
+	SDL_Init(SDL_INIT_VIDEO);
+	
+	//create window
+	window = SDL_CreateWindow("Programacion de graficos II Tp2",0,0,SCREEN_WIDTH,SCREEN_HEIGTH,0);
+	if (window == nullptr)
+		std::cout << "Failed to create window : " << SDL_GetError();
 
-	//The window we'll be rendering to
-	SDL_Window* window = NULL;
+	//create renderer
+	renderer = SDL_CreateRenderer(window, -1, 0);
+	if (renderer == nullptr)
+		std::cout << "Failed to create renderer : " << SDL_GetError();
+	
+	//set renderer size to window size
+	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGTH);
 
-	//The surface contained by the window
-	SDL_Surface* screenSurface = NULL;
+	//set color to red
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 
-	//Initialize SDL
-	if (SDL_Init(SDL_INIT_VIDEO) < 0)
-	{
-		printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-	}
-	else
-	{
-		//Create window
-		window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-		if (window == NULL)
-		{
-			printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
-		}
-		else
-		{
-			while (1) {
-				SDL_Event event;
-				while (SDL_PollEvent(&event)) {
-					/* handle your event here */
-				}
-				
-				//Get window surface
-				screenSurface = SDL_GetWindowSurface(window);
+	//render stuff
+	SDL_RenderClear(renderer); //setwindowcolor to red
+	SDL_RenderPresent(renderer); // present the changes above
 
-				//Fill the surface white
-				SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-
-				//Update the surface
-				SDL_UpdateWindowSurface(window);
-			}
-
-			//Wait two seconds
-			SDL_Delay(2000);
-		}
-	}
-	//Destroy window
-	SDL_DestroyWindow(window);
-
-	//Quit SDL subsystems
-	SDL_Quit();
+	//Delay pa' que no cierra (Ah rre escribia todo en ingles re bonito y despues saltaba en español)
+	SDL_Delay(2000);
 
 	return 0;
 }
+
+//Tuto usado: http://headerphile.com/sdl2/sdl2-part-3-drawing-rectangles/
