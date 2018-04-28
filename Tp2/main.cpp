@@ -23,7 +23,7 @@ int main(int argc, char* args[])
 	rectangle.w = 25;
 
 	//create window
-	window = SDL_CreateWindow("Programacion de graficos II Tp2", 100, 100, SCREEN_WIDTH, SCREEN_HEIGTH, 0);
+	window = SDL_CreateWindow("Programacion de graficos Tp2", 100, 100, SCREEN_WIDTH, SCREEN_HEIGTH, 0);
 	if (window == nullptr)
 		std::cout << "Failed to create window : " << SDL_GetError();
 
