@@ -1,4 +1,5 @@
 #include <SDL.h>
+#include <SDL_image.h>
 #include <iostream>
 
 const int SCREEN_HEIGTH = 800;
@@ -6,21 +7,23 @@ const int SCREEN_WIDTH = 640;
 
 SDL_Window* window;
 SDL_Renderer* renderer;
+SDL_Texture* img;
 SDL_Rect rectangle;
 SDL_Event eventManager;
+
 bool gameOver = false;
 
 
 
 int main(int argc, char* args[])
 {
-	SDL_Init(SDL_INIT_VIDEO);
+	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVERYTHING);
 
 	//init rectangle
 	rectangle.x = 100;
 	rectangle.y = 100;
-	rectangle.h = 50;
-	rectangle.w = 25;
+	rectangle.h = 100;
+	rectangle.w = 100;
 
 	//create window
 	window = SDL_CreateWindow("Programacion de graficos Tp2", 100, 100, SCREEN_WIDTH, SCREEN_HEIGTH, 0);
@@ -28,7 +31,7 @@ int main(int argc, char* args[])
 		std::cout << "Failed to create window : " << SDL_GetError();
 
 	//create renderer
-	renderer = SDL_CreateRenderer(window, -1, 0);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	if (renderer == nullptr)
 		std::cout << "Failed to create renderer : " << SDL_GetError();
 
@@ -37,6 +40,13 @@ int main(int argc, char* args[])
 
 	//set color to red
 	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+
+	SDL_Surface* sur = IMG_Load("SadFace.png");
+	if (sur == NULL)
+		std::cout << "Fallo la imagen ";
+
+	img = SDL_CreateTextureFromSurface(renderer, sur);
+	SDL_FreeSurface(sur);
 
 
 	while (!gameOver)
@@ -54,10 +64,11 @@ int main(int argc, char* args[])
 				rectangle.y--;
 			if (eventManager.key.keysym.sym == SDLK_DOWN)
 				rectangle.y++;
+
 		}
 
 
-
+		
 		SDL_RenderClear(renderer);
 
 		SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
@@ -66,7 +77,11 @@ int main(int argc, char* args[])
 
 		SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
 
+		SDL_RenderCopy(renderer, img, NULL, &rectangle);
+
 		SDL_RenderPresent(renderer);
+
+		SDL_Delay(16);
 
 	}
 
