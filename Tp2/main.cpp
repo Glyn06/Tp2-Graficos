@@ -87,5 +87,3 @@ int main(int argc, char* args[])
 
 	return 0;
 }
-
-//Tuto usado: http://headerphile.com/sdl2/sdl2-part-3-drawing-rectangles/
