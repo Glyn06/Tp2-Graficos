@@ -1,5 +1,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
+#ifdef DEBUG
+	#include<vld.h>
+#endif // DEBUG
 #include <iostream>
 
 const int SCREEN_HEIGTH = 800;

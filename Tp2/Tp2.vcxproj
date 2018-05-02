@@ -80,16 +80,19 @@
       <Optimization>Custom</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDL2-2.0.8\include;$(SolutionDir)SDL2_image-2.0.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Visual Leak Detector\include;$(SolutionDir)SDL2-2.0.8\include;$(SolutionDir)SDL2_image-2.0.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <IntrinsicFunctions>false</IntrinsicFunctions>
+      <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)SDL2-2.0.8\lib\x86;$(SolutionDir)SDL2_image-2.0.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Visual Leak Detector\lib\Win32;$(SolutionDir)SDL2-2.0.8\lib\x86;$(SolutionDir)SDL2_image-2.0.3\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;vld.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)SDL2-2.0.8\lib\x86\SDL2.dll" "$(OutDir)"</Command>
+      <Command>copy "$(SolutionDir)SDL2-2.0.8\lib\x86\SDL2.dll" "$(OutDir)"
+copy "$(SolutionDir)Visual Leak Detector\bin\Win32\*.*" "$(OutDir)"
+copy "$(SolutionDir)SDL2_image-2.0.3\lib\x86\*.*" "$(OutDir)"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -106,15 +109,18 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDL2-2.0.8\include;$(SolutionDir)SDL2_image-2.0.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Visual Leak Detector\include;$(SolutionDir)SDL2-2.0.8\include;$(SolutionDir)SDL2_image-2.0.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(SolutionDir)SDL2_image-2.0.3\lib\x64;$(SolutionDir)SDL2-2.0.8\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Visual Leak Detector\lib\Win64;$(SolutionDir)SDL2_image-2.0.3\lib\x64;$(SolutionDir)SDL2-2.0.8\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;vld.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)SDL2-2.0.8\lib\x64\SDL2.dll" "$(OutDir)"</Command>
+      <Command>copy "$(SolutionDir)SDL2-2.0.8\lib\x64\SDL2.dll" "$(OutDir)"
+copy "$(SolutionDir)Visual Leak Detector\bin\Win64\*.*" "$(OutDir)"
+copy "$(SolutionDir)SDL2_image-2.0.3\lib\x64\*.*" "$(OutDir)"</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>
@@ -139,7 +145,8 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)SDL2-2.0.8\lib\x86\SDL2.dll" "$(OutDir)"</Command>
+      <Command>copy "$(SolutionDir)SDL2-2.0.8\lib\x86\SDL2.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL2_image-2.0.3\lib\x86\*.*" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -160,7 +167,8 @@
       <SubSystem>Windows</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(SolutionDir)SDL2-2.0.8\lib\x64\SDL2.dll" "$(OutDir)"</Command>
+      <Command>copy "$(SolutionDir)SDL2-2.0.8\lib\x64\SDL2.dll" "$(OutDir)"
+copy "$(SolutionDir)SDL2_image-2.0.3\lib\x64\*.*" "$(OutDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
