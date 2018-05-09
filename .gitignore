@@ -1,0 +1,11 @@
+#Ejecutables
+bin
+
+#Objetos
+obj
+
+#Librerias
+dependencies
+
+#cosa rancia
+/.vs
